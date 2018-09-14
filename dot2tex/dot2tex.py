@@ -1903,10 +1903,12 @@ class Dot2PGFConv(DotConvBase):
 
 TIKZ_TEMPLATE = r"""\documentclass{article}
 \usepackage[x11names, svgnames, rgb]{xcolor}
-\usepackage[<<textencoding>>]{inputenc}
+\usepackage{xunicode}
+\usepackage{polyglossia}
 \usepackage{tikz}
 \usetikzlibrary{snakes,arrows,shapes}
 \usepackage{amsmath}
+\usepackage{bidi}
 <<startpreprocsection>>%
 \usepackage[active,auctex]{preview}
 <<endpreprocsection>>%
@@ -2647,7 +2649,7 @@ class TeXDimProc:
         if self.options.get('usepdflatex'):
             command = 'pdflatex -interaction=nonstopmode %s' % self.tempfilename
         else:
-            command = 'latex -interaction=nonstopmode %s' % self.tempfilename
+            command = 'xelatex -interaction=nonstopmode %s' % self.tempfilename
         log.debug('Running command: %s' % command)
         sres = os.popen(command)
 
